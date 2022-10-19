@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="styles.css">
+		<title>Employee Survey 2</title>
+	</head>
+	<body>
+		<h1>
+			<div><img class="logo" src="PerficientLogo.png" alt="PerficientLogo"></div>
+			<div id="Title">Hobbies Survey</div>
+		</h1>
+		
+		<h2>Where are you located?</h2>
+	
+		<form class="inputForms" id="inputZipCode" action="page2">
+		  ZipCode: <input type="text" name="zipcode" id="zipcode"><br><br>
+		  <input type="submit" id="button" value="Submit">
+		</form>
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+		<script>
+			
+			$(document).ready(function() 
+			{
+				
+			jQuery.validator.addMethod("exactlength", function(value, element, param) 
+			{
+				return this.optional(element) || value.length == param;
+			}, $.validator.format("Please enter all 5 digits."));
+					
+			$('#inputZipCode').validate({ 
+			    rules: 
+				    {
+				      zipcode: 
+				      {
+				        required: true,
+				        number: true,
+				        exactlength: 5,
+				      }
+				    },
+				    messages:
+				    {
+						zipcode: 
+						{
+				            required: "Please enter your ZipCode.",
+				            number: "Please enter numbers only."
+				        }
+					},
+				    submitHandler: function(form) 
+				    {				
+						var zipcode = $("#zipcode").val();
+						
+						var employeeZipCode = 
+						{
+							//these variable names MUST match the variables in @Entity object
+							zipcode: zipcode,
+						}
+						
+						$.ajax({
+							type: "POST",
+							url: "/page2",
+							data: employeeZipCode,
+							success: function() 
+							{
+								//alert("Guessss what")
+								window.location.href="table";
+							},
+							error: function() 
+							{
+								alert("Something went wrong!")
+							}
+						})
+					
+					}
+				});
+
+});		
+		</script>
+	
+	</body>
+</html>
+
+<!--
+	JavaScript
+	Need the onclick="myFunction()" to connect button to myFunction on click
+	function myFunction() {
+			
+			const zipCode = document.getElementById("zipcode").value;
+			
+			alert("ZipCode: " + zipCode);
+			
+		  	window.location.href="table.html";
+		}
+-->

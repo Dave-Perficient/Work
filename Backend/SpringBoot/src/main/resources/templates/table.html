@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="tblCSS.css">
+		<title>Employee Survey 3</title>
+	</head>
+	<body>
+		<h1>
+			<div><img class="logo" src="PerficientLogo.png" alt="PerficientLogo"></div>
+			<div id="Title">Hobbies Survey</div>
+		</h1>
+		
+		<table>
+			<tr>
+				<th>Name					</th>
+				<th>Favorite Hobby</th>
+				<th>Second Favorite Hobby</th>
+				<th>Third Favorite Hobby</th>
+				<th>ZipCode</th>
+			</tr>
+			<tr th:each="emp : ${employee}">
+		        <td th:text="${emp.firstName + ' ' + emp.lastName}"> Name</td>
+		        <td th:text="${emp.hobby1}"> Hobby 1</td>
+		        <td th:text="${emp.hobby2}"> Hobby 2</td>
+		        <td th:text="${emp.hobby3}"> Hobby 3</td>
+		        <td th:text="${emp.employeeLocation.zipcode}"> ZipCode</td>
+		    </tr>
+		</table>
+	
+	</body>
+</html>

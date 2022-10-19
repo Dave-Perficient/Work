@@ -1,0 +1,9 @@
+<ul class="emp" style="list-style-type:none">
+  <li *ngFor="let location of employeeLocations">
+    <a routerLink="/detail/{{location.zipcode}}">
+      <span>{{location.zipcode}}</span>
+    </a>
+  </li>
+</ul>
+
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="styles.css">
+		<title>Employee Survey 1</title>
+	</head>
+	<body>
+		<h1>
+			<div><img class="logo" src="PerficientLogo.png" alt="PerficientLogo"></div>
+			<div id="Title">Hobbies Survey</div>
+		</h1>
+		
+		<h2>What are your hobbies?</h2>
+	
+		<form class="inputForms" id="inputHobbies" action="page1">
+		  Favorite Hobby:        <input type="text" name="hobby1" id="hobby1"><br>
+		  Second Favorite Hobby: <input type="text" name="hobby2" id="hobby2"><br>
+		  Third Favorite Hobby:  <input type="text" name="hobby3" id="hobby3"><br><br>
+		  <input type="submit" id="button" value="Submit">
+		</form>
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+		<script>
+			
+			$(document).ready(function() 
+			{
+			
+			$('#inputHobbies').validate({ 
+			    rules: 
+				    {
+				      hobby1: {
+				        required: true
+				      },
+				      hobby2: {
+				        required: true
+				      },
+				      hobby3: {
+						required: true
+						}
+				    },
+				    messages:
+				    {
+						hobby1: {
+				            required: "Please enter your favorite hobby."
+				        },
+						hobby2: {
+				            required: "Please enter your second favorite hobby."
+				        },
+				        hobby3: {
+							required: "Please enter your third favorite hobby."	
+						}
+					
+					},
+				    submitHandler: function(form) 
+				    {
+					var hobby1 = $("#hobby1").val();
+					var hobby2 = $("#hobby2").val();
+					var hobby3 = $("#hobby3").val();
+					
+					var employeeHobbies = 
+					{
+						//these variable names MUST match the variables in @Controller that connects to the action variable
+						hobby1: hobby1,
+						hobby2: hobby2,
+						hobby3: hobby3,
+					}
+					
+					$.ajax({
+						type: "POST",
+						url: "/page1",
+						data: employeeHobbies,
+						success: function() 
+						{
+							//alert("Guessss what")
+							window.location.href="page2.html";
+						},
+						error: function() 
+						{
+							alert("Something went wrong!")
+						}
+					})
+					
+					}
+				});
+
+});		
+		</script>
+	
+	</body>
+</html>
+
+
+<!-- JavaScript
+	Need onclick="myFunction1()" in input for JavaScript to work
+	
+	function myFunction1() {
+			
+			const hobby1 = document.getElementById("hobby1").value;
+			const hobby2 = document.getElementById("hobby2").value;
+			const hobby3 = document.getElementById("hobby3").value;
+			
+			alert("Hobbies: " + hobby1 + "," + hobby2+ "," + hobby3);
+			
+			window.location.href="page2.html";
+		}
+-->

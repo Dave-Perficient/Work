@@ -1,0 +1,11 @@
+<div class="emp" *ngIf="employeeLocation">
+    <h2>Location: {{employeeLocation.zipcode}}</h2>
+    <ul style="list-style-type:none">
+        Hobbies:<br><br>
+        <li *ngFor="let employee of employeeLocation.employees">
+            {{employee.hobby1}}, {{employee.hobby2}}, and {{employee.hobby3}}
+        </li>
+    </ul>
+    <button type="button" (click)="goBack()">go back</button>
+</div>
+
